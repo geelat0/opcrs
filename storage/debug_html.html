@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OPCR</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .header_page {
+            font-size: 10px;
+        }
+
+        .subheader {
+            font-weight: bold;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        .table th, .table td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #8ccdf0;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .table td {
+            vertical-align: top;
+            font-size: 11px;
+            /* page-break-inside: avoid; */
+        }
+
+        .no-indicators td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .footer {
+            text-align: right;
+            font-size: 12px;
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+        }
+
+        .page-number:before {
+            content: counter(page);
+        }
+
+        .avoid-page-break {
+            page-break-inside: avoid;
+        }
+        .page-break {
+            page-break-after: always;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th rowspan="2" style="width: 14%;">Organizational Outcome/PAP</th>
+                    <th rowspan="2" style="width: 18.5%;">Success Indicator</th>
+                    <th rowspan="2">Allotted Budget</th>
+                    <th rowspan="2" style="width: 15%;">Division/Individuals Accountable</th>
+                    <th rowspan="2" style="width: 18%;">Actual Accomplishment</th>
+                    <th colspan="4">Rating</th>
+                    <th rowspan="2" style="width: 13%;">Remarks</th>
+                </tr>
+                <tr class="rating-header">
+                    <th>Q1</th>
+                    <th>Q2</th>
+                    <th>T3</th>
+                    <th>A4</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="10" style="background-color: #8ccdf0; font-weight: bold; text-align: left;">
+                        Core
+                    </td>
+                </tr>
+                                                                                                                                                    
+                                                                    <tr>
+                                    
+                                                                        
+                                    <td rowspan="1">Sample</td>
+
+                                                                        <td>
+                                                                                    <!-- If no division is filtered, show the target and measures -->
+                                            (12%) fdfdf
+                                                                            </td>
+                                    <td>
+                                                                                    <!-- If no division is filtered, show the target and measures -->
+                                            33,434.00
+                                                                            </td>
+                                    <td>
+                                                                                    
+                                                                                            TSSD,<br>
+                                                                                                                        </td>
+                                    <td>
+
+                                                                                    <!-- If no division is filtered, show the target and measures -->
+                                            (0) fdfdf
+                                                                                
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+
+                                </tr>
+                                                                                        
+                <tr>
+                    <td colspan="10" style="background-color: #8ccdf0; font-weight: bold; text-align: left;">
+                        Non Core
+                    </td>
+                </tr>
+
+                                                                                                                                                    
+                                                                    <tr>
+                                    
+                                                                        
+                                    <td rowspan="1">Sasasa</td>
+
+                                                                        <td>
+                                                                                    <!-- If no division is filtered, show the target and measures -->
+                                            (244) scxcxz
+                                                                            </td>
+                                    <td>
+                                                                                    <!-- If no division is filtered, show the target and measures -->
+                                            434,545.00
+                                                                            </td>
+                                    <td>
+                                                                                    
+                                                                                            TSSD,<br>
+                                                                                                                        </td>
+                                    <td>
+
+                                                                                    <!-- If no division is filtered, show the target and measures -->
+                                            (0) scxcxz
+                                                                                
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+
+                                </tr>
+                                                                                                       
+            
+            </tbody>
+        </table>
+    </div>
+    <div class="footer">
+        <span class="page-number"></span>
+    </div>
+
+</body>
+</html>

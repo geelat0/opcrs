@@ -1,0 +1,86 @@
+label.required::after {
+    content: " *";
+    color: red;
+  }
+
+
+.bx-left-arrow-alt{
+    transition: ease-in-out 200ms;
+}
+
+.bx-left-arrow-alt:hover{
+    background-color: #f1efff;
+    border-radius: 100px;
+}
+
+
+.select2-container{
+    z-index: 1092;
+}
+
+.swal2-container{
+  z-index: 1099 !important;
+}
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  
+  .spinner {
+    border: 8px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #4B49AC;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .profile-picture img.rounded-circle {
+    border-radius: 50%;
+    width: 400px; /* or your preferred width */
+    height: 250px; /* or your preferred height */
+    object-fit: cover;
+  }
+
+/* Add red border to input fields with errors */
+.is-invalid {
+  border-color: #dc3545; /* Bootstrap red for validation errors */
+}
+
+/* Style for error messages */
+.invalid-feedback {
+  display: block;
+  color: #dc3545; /* Bootstrap red for validation errors */
+}
+
+.dash-icon{
+  font-size: 5rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.is-invalid {
+  border-color: #dc3545 !important;
+}
+
+.text-danger {
+  display: none;
+  font-size: 80%;
+  margin-top: 0.25rem;
+}
+
+  

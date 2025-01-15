@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* REGISTRATION AND LOGIN BROWSER VIEW----------------------------------------------------------------------- */
+body{
+    background-color: #FAF9FF !important;
+    font-family: "Inter", sans-serif !important;
+    /* font-family: "Poppins", sans-serif; */
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+    color: #383063 !important;
+
+}
+
+.logo-container{
+    width: 20%;
+    margin-bottom: 14px;
+}
+
+.card{
+    border: none;
+}
+
+.custom-login-card{
+    width: 70%;
+}
+
+.custom-registration-card{
+    width: 90%;
+    border: none;
+}
+
+.card-header{
+    border-radius: 16px 16px 0 0 !important;
+}
+
+.border-radius{
+    border-radius: 16px;
+}
+
+.card-header{
+    background-color: #ffffff !important;
+    border: none;
+    color: #5d42f4;
+    font-size: 20px;
+    font-weight: regular;
+}
+
+.row-button-submit{
+    padding-right: 16px;
+}
+
+.custom-btn{
+    background-color: #5d42f4;
+    border: none;
+    color: #FAF9FF;
+    border-radius: 100px;
+    padding-left: 34px;
+    padding-right: 34px;
+}
+
+.custom-btn:hover{
+    background-color: #6b51fb;
+    border: none;
+    color: #FAF9FF;
+    box-shadow: 0px 1px 3px 3px rgba(0,0,0,0.15);
+    -webkit-box-shadow: 0px 1px 3px 3px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 1px 3px 3px rgba(0,0,0,0.15);
+}
+
+.custom-link{
+    font-size: 14px;
+    margin-right: 20px;
+}
+
+.custom-header{
+    color: #0C0342;
+}
+
+.custom-paragraph{
+    color: #0C0342;
+}
+
+.logo-container{
+    margin-bottom: 16px;
+    width: 15%;
+}
+/* LOGIN AND REGISTRATION END----------------------------------------------------------------------- */
+
+/* ICON----------------------------------------------------------------------- */
+.bi-caret-down-fill{
+    font-size: 10px;
+}
+.bi-star-fill{
+    font-size: 18px;
+    color: #0F9D58;
+}
+
+.bi-people-fill{
+    font-size: 18px;
+    color: #5D42F4;
+}
+
+.bi-slash-circle-fill{
+    font-size: 18px;
+    color: #DB4437;
+}
+
+.navlink-icon-color{
+    color: #0C0342 !important;
+    font-size: 20px}
+/* ICON END----------------------------------------------------------------------- */
+
+
+/* DASHBOARD CARD----------------------------------------------------------------------- */
+.card-title{
+    font-weight: 600;
+    font-family: "Inter", sans-serif !important;
+    margin-bottom: -4px !important;
+    color: #FAF9FF;
+}
+
+.card-paragraph{
+    color: #FAF9FF !important;
+}
+
+.small-card-title{
+    font-weight: 600;
+    font-family: "Inter", sans-serif !important;
+    margin-bottom: -16px !important;
+    font-size: 58px;
+    color: #5D42F4;
+}
+
+.small-card-paragraph{
+    color: #0C0342;
+}
+
+.custom-card-banner{
+    border: none !important;
+    border-radius: 20px !important;
+    background: rgb(55,220,255);
+    background: linear-gradient(137deg, rgba(55,220,255,1) 0%, rgba(93,66,244,1) 35%, rgba(220,213,255,1) 100%);
+}
+
+.custom-card{
+    border-radius: 10px !important;
+}
+/* DASHBOARD CARD END----------------------------------------------------------------------- */
+
+
+/* NAVBAR----------------------------------------------------------------------- */
+.div-nav-logo{
+    padding-top: 10%;
+}
+.nav-logo-container{
+    width: 30%;
+}
+/* NAVBAR END----------------------------------------------------------------------- */
+
+
+
+/* MOBILE VIEW PAGE----------------------------------------------------------------------- */
+/* LOGIN AND REGISTRATION PAGE----------------------------------------------------------------------- */
+@media (min-width: 188px) and (max-width: 767.98px) {
+    /* Styles specific to small screens */
+    body {
+      font-size: 16px;
+      padding: 3%;
+    }
+
+    .card{
+        width: 90% !important;
+        border: none;
+        padding: 16px !important;
+    }
+
+    .card-header{
+        text-align: center;
+    }
+
+    .row-button-submit{
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+
+
+    .custom-btn{
+        background-color: #5d42f4;
+        border: none;
+        color: #FAF9FF;
+        border-radius: 5px;
+        /* padding-left: 34px;
+        padding-right: 34px; */
+        width: 100%;
+    }
+
+    .custom-btn:hover{
+        background-color: #6b51fb;
+        border: none;
+        color: #FAF9FF;
+        box-shadow: 0px 1px 3px 3px rgba(0,0,0,0.15);
+        -webkit-box-shadow: 0px 1px 3px 3px rgba(0,0,0,0.15);
+        -moz-box-shadow: 0px 1px 3px 3px rgba(0,0,0,0.15);
+    }
+
+    .custom-link{
+        margin-top: 20px;
+    }
+
+    .custom-header{
+        display: flex;
+        justify-content: center; /* centers horizontally */
+        align-items: center;
+        text-align: center;
+    }
+
+    .custom-paragraph{
+        display: flex;
+        justify-content: center; /* centers horizontally */
+        align-items: center;
+    }
+
+    .logo-container{
+        /* display: flex !important;
+        justify-content: center !important;
+        align-items: center !important; */
+        width: 35%;
+    }
+
+    .hide{
+        display: none;
+    }
+    
+
+    .content-center{
+        display: flex;
+        justify-content: center; /* horizontally centers items */
+        align-items: center; /* vertically centers items */
+    }
+
+    @media (max-width: 900px) {
+        #users-table_wrapper .dt-buttons {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        #users-table_wrapper .btn {
+            border: none;
+            color: #FAF9FF;
+            border-radius: 5px;
+            /* padding-left: 34px;
+            padding-right: 34px; */
+            width: 100%;
+        }
+    }
+
+   
+}
