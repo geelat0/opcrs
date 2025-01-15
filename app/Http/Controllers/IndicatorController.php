@@ -326,8 +326,10 @@ class IndicatorController extends Controller
         $indicator = SuccessIndicator::find(Crypt::decrypt($id));
     
         // Retrieve quarter logs
-        $quarter = Quarter_logs::where('indicator_id', Crypt::decrypt($id))->first();
-    
+        $quarter = Quarter_logs::where('indicator_id', Crypt::decrypt($id))
+        ->orderBy('created_at', 'desc')
+        ->first();
+
         // Variables for all roles
         $division_targets = [];
         $division_ids = [];
@@ -432,7 +434,10 @@ class IndicatorController extends Controller
         $indicator = SuccessIndicator::find(Crypt::decrypt($id));
 
         // Retrieve quarter logs
-        $quarter = Quarter_logs::where('indicator_id', Crypt::decrypt($id))->first();
+       // Retrieve quarter logs
+       $quarter = Quarter_logs::where('indicator_id', Crypt::decrypt($id))
+       ->orderBy('created_at', 'desc')
+       ->first();
 
         // Variables for all roles
         $division_targets = [];

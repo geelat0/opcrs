@@ -93,28 +93,7 @@ class UserController extends Controller
             $query->whereBetween('created_at', [$startDate, $endDate]);
         }
 
-        // if ($request->has('search') && !empty($request->search)) {
-        //     $searchTerm = $request->search;
-
-        //     if (strpos($searchTerm, ' ') !== false) {
-        //         [$firstName, $lastName] = explode(' ', $searchTerm, 2);
-        //         $query->whereHas('role', function($subQuery) use ($firstName, $lastName) {
-        //             $subQuery->where('first_name', 'like', "%{$firstName}%")
-        //                     ->where('last_name', 'like', "%{$lastName}%");
-        //         });
-        //     } else {
-        //         $query->whereHas('role',function($subQuery) use ($searchTerm) {
-        //             $subQuery->where('first_name', 'like', "%{$searchTerm}%")
-        //                     ->orWhere('last_name', 'like', "%{$searchTerm}%")
-        //                     ->orWhere('user_name', 'like', "%{$searchTerm}%")
-        //                     ->orWhere('email', 'like', "%{$searchTerm}%")
-        //                     ->orWhere('position', 'like', "%{$searchTerm}%")
-        //                     ->orWhere('name', 'like', "%{$searchTerm}%")
-        //                     ->orWhere('province', 'like', "%{$searchTerm}%");
-        //         });
-        //     }
-        // }
-
+    
         $users = $query->get();
 
         return DataTables::of($users)
@@ -146,7 +125,7 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'middle_name' => 'required|string|max:255',
+            // 'middle_name' => 'required|string|max:255',
             'province' => 'required|string|max:255',
             'position' => 'required|string|max:255',
             'mobile_number' => 'required|string|max:255',
@@ -189,7 +168,7 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'middle_name' => 'required|string|max:255',
+            // 'middle_name' => 'required|string|max:255',
             'province' => 'required|string|max:255',
             'position' => 'required|string|max:255',
             'mobile_number' => [
@@ -249,7 +228,7 @@ class UserController extends Controller
             // 'id' => 'required|exists:users,id',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'middle_name' => 'required|string|max:255',
+            // 'middle_name' => 'required|string|max:255',
             'province' => 'required|string|max:255',
             'position' => 'required|string|max:255',
             'mobile_number' => [
@@ -407,20 +386,6 @@ class UserController extends Controller
         return response()->json(['success' => true, 'message' => 'Two Factor Authentication Disabled Successfully.']);
     }
 
-    // public function getDivision(Request $request)
-    // {
-    //     $user = User::find(Crypt::decrypt($request->id));
-    //     if ($user) {
-
-    //         $divisionIds = json_decode($user->division_id, true);
-    //             if (is_array($divisionIds)) {
-    //                 $divisions = Division::whereIn('id', $divisionIds)->pluck('id')->toArray();
-    //                 $divisionId =  implode(', ', $divisions);
-    //             }
-    //         return response()->json(['success' => true, 'division_ids' => $divisionId]);
-    //     }
-    //     return response()->json(['success' => false, 'message' => 'User not found'], 404);
-    // }
 
     public function getDivision(Request $request)
     {

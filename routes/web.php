@@ -94,18 +94,18 @@ Route::middleware(['auth_check'])->group(function () {
         Route::get('/getIndicatorById/{id}', [IndicatorController::class, 'getIndicatorById'])->name('indicator.getById');
 
 
-        Route::get('accomplishment', [EntriesController::class, 'index'])->name('entries')->middleware('permission:manage_entries');
-        Route::get('accomplishment_create', [EntriesController::class, 'create'])->name('create')->middleware('permission:manage_entries');
-        Route::get('accomplishment_view', [EntriesController::class, 'view'])->name('view')->middleware('permission:manage_entries');
-        Route::get('accomplishment_edit', [EntriesController::class, 'edit'])->name('edit')->middleware('permission:manage_entries');
-        Route::post('accomplishment/store', [EntriesController::class, 'store'])->name('entries.store')->middleware('permission:manage_entries');
-        Route::post('accomplishment/update', [EntriesController::class, 'update'])->name('entries.update')->middleware('permission:manage_entries');
-        Route::post('accomplishment/destroy', [EntriesController::class, 'destroy'])->name('entries.destroy')->middleware('permission:manage_entries');
-        Route::get('accomplishment/list', [EntriesController::class, 'list'])->name('entries.list')->middleware('permission:manage_entries');
-        Route::get('accomplishment/completed_list', [EntriesController::class, 'completed_list'])->name('entries.completed_list')->middleware('permission:manage_entries');
-        Route::get('accomplishment/getIndicator', [EntriesController::class, 'getIndicator'])->name('entries.getIndicator')->middleware('permission:manage_entries');
+        Route::get('accomplishment', [EntriesController::class, 'index'])->name('entries')->middleware('permission:manage_accomplishments');
+        Route::get('accomplishment_create', [EntriesController::class, 'create'])->name('create')->middleware('permission:manage_accomplishments');
+        Route::get('accomplishment_view', [EntriesController::class, 'view'])->name('view')->middleware('permission:manage_accomplishments');
+        Route::get('accomplishment_edit', [EntriesController::class, 'edit'])->name('edit')->middleware('permission:manage_accomplishments');
+        Route::post('accomplishment/store', [EntriesController::class, 'store'])->name('entries.store')->middleware('permission:manage_accomplishments');
+        Route::post('accomplishment/update', [EntriesController::class, 'update'])->name('entries.update')->middleware('permission:manage_accomplishments');
+        Route::post('accomplishment/destroy', [EntriesController::class, 'destroy'])->name('entries.destroy')->middleware('permission:manage_accomplishments');
+        Route::get('accomplishment/list', [EntriesController::class, 'list'])->name('entries.list')->middleware('permission:manage_accomplishments');
+        Route::get('accomplishment/completed_list', [EntriesController::class, 'completed_list'])->name('entries.completed_list')->middleware('permission:manage_accomplishments');
+        Route::get('accomplishment/getIndicator', [EntriesController::class, 'getIndicator'])->name('entries.getIndicator')->middleware('permission:manage_accomplishments');
 
-        Route::get('getMeasureDetails', [EntriesController::class, 'getMeasureDetails'])->name('entries.getMeasureDetails')->middleware('permission:manage_entries');
+        Route::get('getMeasureDetails', [EntriesController::class, 'getMeasureDetails'])->name('entries.getMeasureDetails')->middleware('permission:manage_accomplishments');
 
 
 

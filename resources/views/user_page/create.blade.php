@@ -21,7 +21,7 @@
                                 <div class="invalid-feedback" id="last_nameError"></div>
                             </div>
                             <div class="form-group mb-3">
-                                <label for="middleName" class="required">Middle Name</label>
+                                <label for="middleName" class="">Middle Name</label>
                                 <input type="text" class="form-control capitalize" id="middleName" name="middle_name">
                                 <div class="invalid-feedback" id="middle_nameError"></div>
                             </div>
