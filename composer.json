@@ -8,6 +8,7 @@
         "php": "^8.2",
         "bacon/bacon-qr-code": "^3.0",
         "barryvdh/laravel-dompdf": "^3.0",
+        "intervention/image": "^3.10",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "maatwebsite/excel": "^1.1",

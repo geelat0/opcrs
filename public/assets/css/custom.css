@@ -83,4 +83,11 @@ label.required::after {
   margin-top: 0.25rem;
 }
 
+.profile-image {
+  width: 40px;   /* Fixed width for the circle */
+  height: 40px;  /* Fixed height for the circle */
+  object-fit: cover;  /* Ensures the image covers the circle area */
+  border-radius: 50%; /* Makes the image a circle */
+}
+
   

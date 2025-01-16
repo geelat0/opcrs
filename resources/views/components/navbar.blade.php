@@ -37,7 +37,7 @@
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                        <img src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : 'https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg' }}" alt class="w-px-40 h-auto rounded-circle" id="profileImageShow" />
+                        <img src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : 'https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg' }}" alt class="profile-image w-px-40 h-px-40 rounded-circle" id="profileImageShow" />
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -46,7 +46,7 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
-                                        <img src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : 'https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg' }}" alt class="w-px-40 h-auto rounded-circle" id="profileImageShow2"/>
+                                        <img src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : 'https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg' }}" alt class=" profile-imagew-px-40 h-px-40 rounded-circle" id="profileImageShow2"/>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">

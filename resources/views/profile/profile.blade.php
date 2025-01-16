@@ -195,7 +195,12 @@
                 },
                 error: function(xhr) {
                     hideLoader();
-                    console.log(xhr.responseText);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: xhr.responseJSON.errors.profile_image || 'An error occurred.',
+                        showConfirmButton: true,
+                    });
                 }
             });
         });
