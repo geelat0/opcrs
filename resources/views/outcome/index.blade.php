@@ -437,10 +437,9 @@
 
         $('#createOrgModal').on('hidden.bs.modal', function() {
             $(this).find('form')[0].reset(); // Reset form fields
-    $(this).find('.is-invalid').removeClass('is-invalid'); // Remove validation error classes
-    $(this).find('.invalid-feedback').text(''); // Clear error messages
-    $('#organizational_outcomes').empty(); // Clear repeated inputs
-    outcomeIndex = 1; // Reset outcome index
+            $(this).find('.is-invalid').removeClass('is-invalid'); // Remove validation error classes
+            $(this).find('.invalid-feedback').text(''); // Clear error messages
+            outcomeIndex = 1; // Reset outcome index
          
         });
      

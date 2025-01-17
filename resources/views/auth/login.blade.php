@@ -56,7 +56,7 @@
     <script src="../../assets/js/config.js"></script>
   </head>
 
-  <body>
+<body>
     <!-- Content -->
 
     <div class="authentication-wrapper authentication-cover">

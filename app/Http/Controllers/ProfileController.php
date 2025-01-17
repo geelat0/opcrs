@@ -102,7 +102,15 @@ class ProfileController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'current_password' => 'required',
-            'new_password' => 'required|string|min:8|confirmed',
+            'new_password' => [
+                'required',
+                'string',
+                'min:8',
+                'confirmed',
+                'regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[^\w%]).+$/'
+            ],
+        ], [
+            'new_password.regex' => 'The password must be at least 8 characters long and include at least one uppercase letter, one number, and one special character (excluding the % symbol).'
         ]);
 
         if ($validator->fails()) {

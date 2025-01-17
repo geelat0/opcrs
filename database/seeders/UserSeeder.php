@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('admin000..'),
                 'created_by' => 'A.bong',
             ]
-          );
+        );
        
     }
 }
