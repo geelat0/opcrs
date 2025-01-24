@@ -26,6 +26,7 @@ class PermissionSeeder extends Seeder
             'generate_report_excel',
             'generate_report_pdf',
             'generate_report_doc',
+            'upload_file',
 
             // Add all other necessary permissions
         ];

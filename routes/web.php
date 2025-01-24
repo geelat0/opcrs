@@ -13,6 +13,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SuccesIndicatorController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -108,12 +109,22 @@ Route::middleware(['auth_check'])->group(function () {
         Route::get('getMeasureDetails', [EntriesController::class, 'getMeasureDetails'])->name('entries.getMeasureDetails')->middleware('permission:manage_accomplishments');
 
 
-
         Route::get('generate', [ReportController::class, 'index'])->name('generate')->middleware('permission:generate_report');
         Route::post('/generate-pdf', [ReportController::class, 'generatePDF'])->name('generate.pdf')->middleware('permission:generate_report_pdf');
         Route::post('/generate-word', [ReportController::class, 'generateWord'])->name('generate.word')->middleware('permission:generate_report_doc');
         Route::get('pdf', [ReportController::class, 'pdf'])->name('show.pdf')->middleware('permission:generate_report');
         Route::get('/export', [ReportController::class, 'exportMultipleSheets'])->name('export')->middleware('permission:generate_report_excel');
+
+        Route::get('/upload', [UploadController::class, 'index'])->name('upload')->middleware('permission:upload_file');
+        Route::post('/upload/store', [UploadController::class, 'store'])->name('upload.store')->middleware('permission:upload_file');
+        Route::get('/upload/getCategoryUploads', [UploadController::class, 'getCategoryUploads'])->name('upload.getCategoryUploads')->middleware('permission:upload_file');
+        Route::get('/upload/list', [UploadController::class, 'list'])->name('upload.list')->middleware('permission:upload_file');
+        Route::get('/upload/download/{id}', [UploadController::class, 'download'])->name('upload.download');
+        Route::post('/upload/update', [UploadController::class, 'update'])->name('upload.update')->middleware('permission:upload_file');
+        Route::post('/upload/destroy', [UploadController::class, 'destroy'])->name('upload.destroy')->middleware('permission:upload_file');
+        Route::get('/upload/getUpload', [UploadController::class, 'getUpload'])->name('upload.getUpload')->middleware('permission:upload_file');
+        Route::get('/uploadLogs', [UploadController::class, 'uploadLogs'])->name('upload.uploadLogs')->middleware('permission:uploadLogs');
+
 
 
 });

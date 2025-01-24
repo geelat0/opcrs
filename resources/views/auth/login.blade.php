@@ -74,7 +74,7 @@
           </div>
         </div> --}}
         <div class="d-none d-lg-flex col-lg-7 col-xl-8 d-flex bg-primary"
-            style=" background-image: url('{{ asset('assets/img/illustrations/opcr_login_wall4.png') }}');
+            style=" background-image: url('{{ asset('assets/img/illustrations/opcr_login_wall3.jpg') }}');
                     background-size: cover;
                     background-position: center;
                     background-repeat: no-repeat;">
