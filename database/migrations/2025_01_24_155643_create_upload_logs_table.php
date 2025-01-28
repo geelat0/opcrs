@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('upload_logs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('upload_id');
-            $table->string('file_name');
             $table->string('user');
             $table->string('activity');
             $table->timestamps();

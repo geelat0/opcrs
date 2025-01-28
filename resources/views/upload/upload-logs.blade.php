@@ -229,6 +229,7 @@
             ],
 
             columns: [
+                { data: 'code', name: 'code', title: 'File Code' },
                 { data: 'user', name: 'user', title: 'Name' },
                 {data: 'file_name', name: 'file_name', title: 'File Name'},
                 { data: 'activity', name: 'activity', title: 'Activity' },

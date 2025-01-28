@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('upload', function (Blueprint $table) {
             $table->id();
+            $table->string('code');
             $table->longText('file')->nullable();
             $table->unsignedTinyInteger('upload_category_id')->nullable();
             $table->string('original_filename');

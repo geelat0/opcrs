@@ -62,7 +62,6 @@
 </div>
     @include('upload.create')
     @include('upload.edit')
-    @include('upload.view')
 
 @endsection
 
@@ -338,7 +337,7 @@
                         });
                     }
                 },
-               
+               @if( Auth::user()->role->name === 'SuperAdmin')
                 {
                     text: 'Delete',
                     className: 'btn btn-danger user_btn',
@@ -368,26 +367,14 @@
                                     },
                                     success: function(response) {
                                         hideLoader();
-                                        if (response.success) {
+                                       
                                             Swal.fire(
                                                 'Deleted!',
                                                 'User has been deleted.',
                                                 'success'
                                             );
                                             table.ajax.reload();
-                                        } else {
-                                            var errorMessage = '';
-                                            Object.keys(response.errors).forEach(function(key) {
-                                                errorMessage += response.errors[key][0] + '<br>';
-                                            });
-                                            hideLoader();
-                                            Swal.fire({
-                                                icon: 'error',
-                                                title: 'Deletion Failed',
-                                                html: response.errors
-                                            });
-                                           
-                                        }
+                                       
                                     },
                                     error: function(xhr) {
                                         hideLoader();
@@ -399,6 +386,8 @@
                         });
                     }
                 },
+                @endif
+                @if( Auth::user()->role->name === 'SuperAdmin')
                 {
                     text: 'Upload Logs',
                     className: 'btn btn-warning user_btn',
@@ -406,11 +395,13 @@
                         window.location.href = '{{ route('upload.uploadLogs') }}';
                     }
                 }
-
+                @endif
             ],
 
             columns: [
                 { data: 'id', name: 'id', title: 'ID', visible: false },
+                { data: 'code', name: 'code', title: 'File Code' },
+
                 {
                     data: 'file',
                     name: 'file',

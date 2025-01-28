@@ -114,8 +114,13 @@ class UploadController extends Controller
                 return response()->json(['errors' => ['file' => 'Invalid file type']], 422);
             }
 
+            // Generate the code
+            $lastUpload = Upload::orderBy('id', 'desc')->first();
+            $newCode = $lastUpload ? sprintf('UL-%04d', intval(substr($lastUpload->code, 3)) + 1) : 'UL-0001';
+
             // Save the file to the database
             $upload = new Upload();
+            $upload->code = $newCode;
             $upload->upload_category_id = $request->upload_category_id;
             $upload->original_filename = $file->getClientOriginalName(); // Store the original filename
             $upload->file = $base64File;
@@ -124,7 +129,6 @@ class UploadController extends Controller
 
             $upload_logs = new UploadLogs();
             $upload_logs->upload_id = $upload->id;
-            $upload_logs->file_name =  $upload->original_filename;
             $upload_logs->user = Auth::user()->first_name . ' ' . Auth::user()->last_name;
             $upload_logs->activity = 'Uploaded a file';
             $upload_logs->save();
@@ -180,6 +184,10 @@ class UploadController extends Controller
             ->editColumn('id', function($data) {
                 return Crypt::encrypt($data->id);
 
+            })
+
+            ->editColumn('code', function($data) {
+                return $data->code;
             })
 
             ->editColumn('file', function($data) {
@@ -298,7 +306,6 @@ class UploadController extends Controller
 
             $upload_logs = new UploadLogs();
             $upload_logs->upload_id = decrypt($request->id);
-            $upload_logs->file_name =  $upload->original_filename;
             $upload_logs->user = Auth::user()->first_name . ' ' . Auth::user()->last_name;
             $upload_logs->activity = 'Updated the uploaded file';
             $upload_logs->save();
@@ -321,7 +328,6 @@ class UploadController extends Controller
 
             $upload_logs = new UploadLogs();
             $upload_logs->upload_id = decrypt($request->id);
-            $upload_logs->file_name =  $upload->original_filename;
             $upload_logs->user = Auth::user()->first_name . ' ' . Auth::user()->last_name;
             $upload_logs->activity = 'Deleted the uploaded file';
             $upload_logs->save();
@@ -337,8 +343,8 @@ class UploadController extends Controller
     public function getUpload(Request $request){
         try{
 
-            $query = UploadLogs::whereNotNull('upload_id');
-            
+            $query = UploadLogs::with('upload')->whereNotNull('upload_id');
+        
             if ($request->has('date_range') && !empty($request->date_range)) {
                 [$startDate, $endDate] = explode(' to ', $request->date_range);
                 $startDate = Carbon::createFromFormat('m/d/Y', $startDate)->startOfDay();
@@ -355,6 +361,13 @@ class UploadController extends Controller
 
             })
 
+            ->addColumn('code', function($data) {
+                return $data->upload->code;
+            })
+
+            ->addColumn('file_name', function($data) {
+                return $data->upload->original_filename;
+            })
 
             ->editColumn('created_at', function($data) {
                 return $data->created_at->format('m/d/Y');
