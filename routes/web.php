@@ -13,6 +13,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SuccesIndicatorController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\UploadCategoryController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -126,7 +127,14 @@ Route::middleware(['auth_check'])->group(function () {
         Route::post('/upload/destroy', [UploadController::class, 'destroy'])->name('upload.destroy')->middleware('permission:upload_file');
         Route::get('/upload/getUpload', [UploadController::class, 'getUpload'])->name('upload.getUpload')->middleware('permission:upload_file');
         Route::get('/uploadLogs', [UploadController::class, 'uploadLogs'])->name('upload.uploadLogs')->middleware('permission:uploadLogs');
-        Route::get('/categories', [UploadController::class, 'getCategories'])->name('categories.get')->middleware('permission:uploadLogs');
+        Route::get('/getcategories', [UploadController::class, 'getCategories'])->name('categories.get')->middleware('permission:uploadLogs');
+
+
+        Route::get('/categories', [UploadCategoryController::class, 'index'])->name('categories.index')->middleware('permission:manage_upload_category');
+        Route::get('/categories/list', [UploadCategoryController::class, 'list'])->name('categories.list')->middleware('permission:manage_upload_category');
+        Route::post('/categories/store', [UploadCategoryController::class, 'store'])->name('categories.store')->middleware('permission:manage_upload_category');
+        Route::post('/categories/update', [UploadCategoryController::class, 'update'])->name('categories.update')->middleware('permission:manage_upload_category');
+        Route::post('/categories/deleted', [UploadCategoryController::class, 'deleted'])->name('categories.deleted')->middleware('permission:manage_upload_category');
 
 
 

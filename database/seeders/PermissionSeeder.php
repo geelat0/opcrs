@@ -28,6 +28,7 @@ class PermissionSeeder extends Seeder
             'generate_report_doc',
             'upload_file',
             'uploadLogs',
+            'manage_upload_category'
 
             // Add all other necessary permissions
         ];

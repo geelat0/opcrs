@@ -68,11 +68,27 @@
         </li>
         @endif
 
+        @if(auth()->user()->can('manage_upload_category') || auth()->user()->can('upload_file') )
+          <li class="menu-item">
+              <div style="margin-left: 5%; margin-top: 5%; color: #b4b0c4;">Upload</div>
+          </li>
+      @endif
+
+
         @if(auth()->user()->can('upload_file'))
         <li class="menu-item {{ request()->is('upload_file') ? 'active' : '' }}">
           <a href="/upload" class="menu-link" @if( Auth::user()->role->name === 'SuperAdmin' ||  Auth::user()->role->name === 'Admin') title="Permission: upload_file" data-toggle="tooltip" data-placement="right" @endif>
             <i class='menu-icon tf-icons bx bx-upload'></i>
-            <div class="text-truncate" data-i18n="Page 2">Upload</div>
+            <div class="text-truncate" data-i18n="Page 2">File Upload</div>
+          </a>
+        </li>
+        @endif
+
+        @if(auth()->user()->can('manage_upload_category'))
+        <li class="menu-item {{ request()->is('categories') ? 'active' : '' }}">
+          <a href="/categories" class="menu-link" @if( Auth::user()->role->name === 'SuperAdmin' ||  Auth::user()->role->name === 'Admin') title="Permission: manage_upload_category" data-toggle="tooltip" data-placement="right" @endif>
+            <i class='menu-icon tf-icons bx bxs-category'></i>
+            <div class="text-truncate" data-i18n="Page 2">Upload Category</div>
           </a>
         </li>
         @endif

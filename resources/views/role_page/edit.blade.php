@@ -13,7 +13,7 @@
                         <div class="col">
                             <input type="hidden" name="id" id="edit_role_id">
                             <div class="form-group">
-                                <label for="name" class="required capitalize">First Name</label>
+                                <label for="name" class="required capitalize">Name</label>
                                 <input type="text" class="form-control" id="edit_name" name="name">
                                 <div class="invalid-feedback" id="nameError"></div>
                             </div>
