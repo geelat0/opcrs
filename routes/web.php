@@ -118,12 +118,15 @@ Route::middleware(['auth_check'])->group(function () {
         Route::get('/upload', [UploadController::class, 'index'])->name('upload')->middleware('permission:upload_file');
         Route::post('/upload/store', [UploadController::class, 'store'])->name('upload.store')->middleware('permission:upload_file');
         Route::get('/upload/getCategoryUploads', [UploadController::class, 'getCategoryUploads'])->name('upload.getCategoryUploads')->middleware('permission:upload_file');
-        Route::get('/upload/list', [UploadController::class, 'list'])->name('upload.list')->middleware('permission:upload_file');
+
+        Route::get('/upload/list/', [UploadController::class, 'list'])->name('upload.list')->middleware('permission:upload_file');
+
         Route::get('/upload/download/{id}', [UploadController::class, 'download'])->name('upload.download');
         Route::post('/upload/update', [UploadController::class, 'update'])->name('upload.update')->middleware('permission:upload_file');
         Route::post('/upload/destroy', [UploadController::class, 'destroy'])->name('upload.destroy')->middleware('permission:upload_file');
         Route::get('/upload/getUpload', [UploadController::class, 'getUpload'])->name('upload.getUpload')->middleware('permission:upload_file');
         Route::get('/uploadLogs', [UploadController::class, 'uploadLogs'])->name('upload.uploadLogs')->middleware('permission:uploadLogs');
+        Route::get('/categories', [UploadController::class, 'getCategories'])->name('categories.get')->middleware('permission:uploadLogs');
 
 
 

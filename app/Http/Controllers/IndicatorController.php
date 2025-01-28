@@ -605,27 +605,54 @@ class IndicatorController extends Controller
             ->make(true);
     }
 
+    // public function getDivision(Request $request){
+    //     $searchTerm = $request->input('q'); // Capture search term
+
+    //     $userDivisionIds = User::where('id', Auth::user()->id)
+    //                             ->pluck('division_id')
+    //                             ->first();
+
+    //     $userDivisionIds = json_decode($userDivisionIds, true);
+    //         $userDivisionIds = array_map('intval', $userDivisionIds);
+
+    //     $query = Division::where('status', 'Active')
+    //                       ->whereNull('deleted_at')
+    //                       ->where('division_name', 'like', "%{$searchTerm}%");
+
+    //     if (!empty($userDivisionIds)) {
+    //         $query->whereIn('id', $userDivisionIds);
+    //     }
+
+    //     $data = $query->get(['id', 'division_name']);
+    //     return response()->json($data);
+    // }
+
     public function getDivision(Request $request){
         $searchTerm = $request->input('q'); // Capture search term
-
-        $userDivisionIds = User::where('id', Auth::user()->id)
-                                ->pluck('division_id')
-                                ->first();
-
-        $userDivisionIds = json_decode($userDivisionIds, true);
-            $userDivisionIds = array_map('intval', $userDivisionIds);
-
+    
+        $user = Auth::user();
         $query = Division::where('status', 'Active')
                           ->whereNull('deleted_at')
                           ->where('division_name', 'like', "%{$searchTerm}%");
-
-        if (!empty($userDivisionIds)) {
-            $query->whereIn('id', $userDivisionIds);
+    
+        if ($user->role->name !== 'SuperAdmin') {
+            $userDivisionIds = User::where('id', $user->id)
+                                    ->pluck('division_id')
+                                    ->first();
+    
+            $userDivisionIds = json_decode($userDivisionIds, true);
+            $userDivisionIds = array_map('intval', $userDivisionIds);
+    
+            if (!empty($userDivisionIds)) {
+                $query->whereIn('id', $userDivisionIds);
+            }
         }
-
+    
         $data = $query->get(['id', 'division_name']);
         return response()->json($data);
     }
+
+
 
     public function store(Request $request)
     {

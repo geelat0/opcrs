@@ -90,4 +90,33 @@ label.required::after {
   border-radius: 50%; /* Makes the image a circle */
 }
 
+.nav-item .office-btn {
+  width: 220px; /* Set a fixed width */
+  height: 60px; /* Set a fixed height */
+  color: #fff;
+  border: none;
+  border-radius: 8px; /* Rounded corners */
+  font-size: 14px; /* Consistent font size */
+  text-align: center;
+  white-space: normal; /* Allow text wrapping */
+  padding: 8px 12px; /* Add padding for spacing */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: capitalize; /* Capitalize text */
+  cursor: pointer;
+  transition: all 0.3s ease-in-out; /* Smooth hover effect */
+}
+
+.nav-item .office-btn:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  background-color: var(--btn-color, #a9d2dc);
+}
+
+.nav-item .office-btn.active {
+  border: 2px solid #000; /* Highlight the active button */
+   background-color: var(--btn-color, #a9d2dc);
+}
+
   

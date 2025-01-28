@@ -2,26 +2,7 @@
 
 @section('content')
 
-<!-- File Modal -->
-<div class="modal fade" id="fileModal" tabindex="-1" role="dialog" aria-labelledby="fileModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="fileModalLabel">File Preview</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- File preview area -->
-                <iframe id="filePreview" src="" style="width: 100%; height: 500px;" frameborder="0"></iframe>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row mb-3">
+<div class="row mt-4">
     <div class="col">
         <div class="card">
             <div class="card-body">
@@ -60,32 +41,29 @@
     </div>
 </div>
 
-{{-- Nav Tabs and Datatable Container --}}
-<div class="col-md">
-    <div class="nav-align-top">
-        
-        <ul class="nav nav-pills nav-fill d-flex flex-nowrap overflow-auto mb-4 mt-4 gap-2" id="ul-scroll" role="tablist">
-           {{-- nav-item --}}
-        </ul>
 
-        <div class="tab-content mt-2">
-            <div class="tab-pane fade show active" id="navs-pills-justified" role="tabpanel">
-                <p class="text-secondary" id="office-title"></p>
-                <div class="table-responsive pt-3">
-                    <table id="uploaded-table"  class="table table-striped" style="width: 100%">
-                      <tbody>
-                      </tbody>
-                    </table>
-                </div>
-                
+<div class="row mt-4">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+
+              {{-- <p class="card-description"> Add class <code>.table-bordered</code> --}}
+              </p>
+
+              <div class="table-responsive pt-3">
+                <table id="uploaded-table"  class="table table-striped" style="width: 100%">
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>
             </div>
-        </div>
+          </div>
     </div>
 </div>
 
-{{-- include --}}
-@include('upload.create')
-@include('upload.edit')
+
+    @include('upload.create')
+    @include('upload.edit')
 
 @endsection
 
@@ -94,80 +72,6 @@
 <script>
 
     $(document).ready(function() {
-
-        let selectedStartDate, selectedEndDate, selectedYear;
-
-        function navitem() {
-            $.ajax({
-                url: '{{ route('categories.get') }}',
-                method: 'GET',
-                success: function (categories) {
-                    const ulScroll = document.getElementById('ul-scroll');
-                    ulScroll.innerHTML = ''; // Clear existing items to avoid duplicates
-
-                    const colors = ['#007bff', '#28a745', '#dc3545', '#ffc107', '#17a2b8'];
-
-                    categories.forEach((category, index) => {
-                        const li = document.createElement('li');
-                        li.classList.add('nav-item');
-
-                        const button = document.createElement('button');
-                        button.type = 'button';
-                        button.classList.add('btn', 'office-btn');
-                        button.style.color = '#007bff';
-                        button.dataset.route = '{{ route('upload.list') }}';
-                        button.role = 'tab';
-                        button.ariaSelected = index === 0 ? 'true' : 'false';
-                        button.textContent = `${selectedYear || new Date().getFullYear()} ${category.category_name}`;
-
-                        button.style.color = colors[index % colors.length]; // Loop through colors
-
-
-                        if (index === 0) {
-                            button.classList.add('active');
-                        }
-
-                        li.appendChild(button);
-                        ulScroll.appendChild(li);
-                    });
-
-                    // Bind click event after dynamically adding buttons
-                    bindOfficeButtonEvents();
-
-                     // Trigger the first category button if available
-                    const firstButton = ulScroll.querySelector('.office-btn');
-                    if (firstButton) {
-                        firstButton.click();
-                    }
-                }
-            });
-        }
-
-        function bindOfficeButtonEvents() {
-            // Handle button clicks for dynamic routes
-            $('.office-btn').off('click').on('click', function (e) {
-                e.preventDefault();
-
-                $(".office-btn").removeClass("active");
-                $(this).addClass("active");
-
-                const officeTitle = $(this).text().trim().replace(/[^a-zA-Z\s]/g, '').trim();
-                const route = $(this).data('route');
-
-                // Update table data
-                table.ajax.url(route).load();
-
-                // Update office title
-                $('#office-title').text(officeTitle);
-            });
-        }
-
-        // Call navitem to initialize
-        navitem();
-
-        // Update the currently active button's title
-        const activeButton = $(".office-btn.active").text().trim().replace(/[^a-zA-Z\s]/g, '').trim();
-        $('#office-title').text(activeButton);
 
         $.ajax({
             url: '{{ route('upload.getCategoryUploads') }}',
@@ -194,8 +98,6 @@
             onChange: function(selectedDates, dateStr, instance) {
                 // Check if both start and end dates are selected
                 if (selectedDates.length === 2) {
-                    const startDate = selectedDates[0];
-                    const endDate = selectedDates[1];
                     // Check if the end date is earlier than or equal to the start date
                     if (selectedDates[1] <= selectedDates[0]) {
                         Swal.fire({
@@ -206,23 +108,7 @@
                     } else {
                         // Reload the tables if a valid range is selected
                         table.ajax.reload(null, false);
-
                     }
-
-                        // Update the month and year display
-                        const startMonth = startDate.toLocaleString('default', { month: 'short' });
-                        const endMonth = endDate.toLocaleString('default', { month: 'short' });
-                        const startYear = startDate.getFullYear();
-                        const endYear = endDate.getFullYear();
-
-                        if (startYear === endYear) {
-                            selectedYear = startYear;
-                            console.log(selectedYear);
-                        } else {
-                            selectedYear = `${startYear} - ${endYear}`;
-                        }
-                         // Update nav items with the selected year
-                        navitem();
                 }
             },
             // Add clear button
@@ -239,8 +125,6 @@
                 clearButton.addEventListener("click", function() {
                     instance.clear(); // Clear the date range
                     table.ajax.reload(null, false); // Reload the tables
-                    selectedYear = new Date().getFullYear(); // Reset to current year
-                    navitem(); // Update nav items with the current year
                 });
             }
         });
@@ -249,9 +133,9 @@
             responsive: true,
             processing: false,
             serverSide: true,
-            pageLength: 10,
-            paging: true,
+            pageLength: 30,
             lengthChange: false,
+            paging: false,
             ordering: false,
             search: true,
             scrollY: 400,
@@ -263,7 +147,6 @@
                 data: function(d) {
                     // Include the date range in the AJAX request
                     d.date_range = $('#date-range-picker').val();
-                    d.upload_category = $(".office-btn.active").text().trim().replace(/[^a-zA-Z\s]/g, '').trim();
                     
                 },
             },
@@ -519,7 +402,6 @@
 
             columns: [
                 { data: 'id', name: 'id', title: 'ID', visible: false },
-                { data: 'content', name: 'content', title: 'Content', visible: false },
                 { data: 'code', name: 'code', title: 'File Code' },
 
                 {
@@ -528,17 +410,10 @@
                     title: 'File',
                     render: function(data, type, row) {
                         if (data) {
-    
                             return `
-                                <a href="#" class="file"
-                                data-file="${row.content}"
-                                data-name="${data}"
-                                data-id = "${row.id}">
-                                    <i class="bx bx-file"></i> ${data};
-                                </a>`
-
-                            
-                           ;
+                                <a href="/upload/download/${row.id}" class="file-preview">
+                                    <i class="bx bx-file"></i> ${data}
+                                </a>`;
                         } else {
                             return 'No File';
                         }
@@ -548,7 +423,6 @@
                 },         
                 { data: 'upload_category_id', name: 'upload_category_id', title: 'Category' },
                 { data: 'category_id', name: 'category_id', title: 'Category', visible: false, },
-                { data: 'month', name: 'month', title: 'Month' },
                 { data: 'created_by', name: 'created_by', title: 'Created By' },
                 { data: 'updated_by', name: 'updated_by', title: 'Updated By' },
                 { data: 'created_at', name: 'created_at', title: 'Created At' },
@@ -586,37 +460,6 @@
             $(this).find('form')[0].reset(); // Reset form fields
             $(this).find('.is-invalid').removeClass('is-invalid'); // Remove validation error classes
             $(this).find('.invalid-feedback').text(''); // Clear error messages
-        });
-
-
-        $(document).on('click', '.file', function(e) {
-            var name = $(this).data('name')
-            var file = $(this).data('file')
-            var id = $(this).data('id')
-            
-            if (name.endsWith('.pdf')) {
-
-                e.preventDefault();
-                var base64File = $(this).data('file');
-                var fileUrl = 'data:application/pdf;base64,' + base64File;
-                $('#filePreview').attr('src', fileUrl);
-                $('#fileModal').modal('show');
-               
-                } else {
-
-                    e.preventDefault();
-                    var downloadUrl = `/upload/download/${id}`;
-                    
-                    // Create a temporary anchor element
-                    var link = document.createElement('a');
-                    link.href = downloadUrl;
-                    link.target = '_blank'; // Open in a new tab/window for safety
-                    link.download = name;  // Suggest a filename for download
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link); // Clean up the element
-            
-                }
         });
 
     });

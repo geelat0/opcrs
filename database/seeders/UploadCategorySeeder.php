@@ -18,7 +18,7 @@ class UploadCategorySeeder extends Seeder
             'JobStart Monthly Reports',
             'SPES Quarterly Reports',
             'Physical and Financial Targets',
-            'Statistical Performance Reporting System (SPRS)',
+            'Statistical Performance Reporting System',
             'PESO Reports',
             'BLR Monitoring Report',
             'DILP Livelihood Report',

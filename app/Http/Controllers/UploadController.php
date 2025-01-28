@@ -83,8 +83,10 @@ class UploadController extends Controller
         ->count();
 
         $entriesCount = $filteredIndicators->count();
+
+        $categories = CategoryUpload::whereNull('deleted_at')->get();
        
-        return view('upload.upload-index', compact('user', 'userCount', 'roleCount', 'entriesCount', 'loggedInUsersCount', 'targetMonth', 'CompleteEntriesCount'));
+        return view('upload.upload-index', compact('user', 'userCount', 'roleCount', 'entriesCount', 'loggedInUsersCount', 'targetMonth', 'CompleteEntriesCount', 'categories'));
     }
 
     public function store(Request $request){
@@ -92,7 +94,7 @@ class UploadController extends Controller
         try{
             $validator = Validator::make($request->all(), [
                 'upload_category_id' => 'required|exists:category_upload,id',
-                'file' => 'required|file|mimes:pdf,xlsx,xls|max:2048',
+                'file' => 'required|file|mimes:pdf,xlsx,xls|max:102400',
             ]);
 
             if ($validator->fails()) {
@@ -159,24 +161,39 @@ class UploadController extends Controller
     public function list(Request $request){
         try{
 
+            if($request->upload_category){
+                $category = CategoryUpload::where('category_name', $request->upload_category)->first()->id;
+            }else{
+                $category = CategoryUpload::first()->id;
+            }
+
+
             if(Auth::user()->role->name === 'SuperAdmin' || Auth::user()->role->name === 'Admin'){
                 $query = Upload::whereNull('deleted_at')
-                ->with('upload_category');
+                    ->with('upload_category')
+                    ->where('upload_category_id', $category);           
             }
             else{
                 $query = Upload::whereNull('deleted_at')
-                ->with('upload_category')
-                ->where('created_by', Auth::user()->user_name);
+                    ->with('upload_category')
+                    ->where('upload_category_id', $category)
+                    ->where('created_by', Auth::user()->user_name);
             }
+
+            $query->orderByRaw('MONTH(created_at) DESC');
 
             if ($request->has('date_range') && !empty($request->date_range)) {
                 [$startDate, $endDate] = explode(' to ', $request->date_range);
                 $startDate = Carbon::createFromFormat('m/d/Y', $startDate)->startOfDay();
                 $endDate = Carbon::createFromFormat('m/d/Y', $endDate)->endOfDay();
     
-                $query->whereBetween('created_at', [$startDate, $endDate]);
+               
+            }else{
+                $startDate = Carbon::now()->startOfMonth();
+                $endDate = Carbon::now()->endOfMonth();
             }
 
+            $query->whereBetween('created_at', [$startDate, $endDate]);
 
             $list = $query->get();
 
@@ -192,6 +209,10 @@ class UploadController extends Controller
 
             ->editColumn('file', function($data) {
                 return $data->original_filename;
+            })
+
+            ->editColumn('content', function($data) {
+                return $data->file;
             })
         
             ->editColumn('upload_category_id', function($data) {
@@ -217,6 +238,10 @@ class UploadController extends Controller
             ->editColumn('updated_by', function($data) {
                 return $data->updated_by;
             })
+
+            ->addColumn('month', function($data) {
+                return $data->created_at->format('F');
+            })
         
             ->make(true);
         
@@ -225,6 +250,7 @@ class UploadController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
 
     public function download($id)
     {
@@ -270,7 +296,7 @@ class UploadController extends Controller
 
             if ($request->hasFile('file')) {
                 $validator = Validator::make($request->all(), [
-                    'file' => 'required|file|mimes:pdf,xlsx,xls|max:2048',
+                    'file' => 'required|file|mimes:pdf,xlsx,xls|max:102400',
                 ]);
 
                 if ($validator->fails()) {
@@ -450,4 +476,9 @@ class UploadController extends Controller
         return view('upload.upload-logs', compact('user', 'userCount', 'roleCount', 'entriesCount', 'loggedInUsersCount', 'targetMonth', 'CompleteEntriesCount'));
     }
     
+    public function getCategories()
+    {
+        $categories = CategoryUpload::whereNull('deleted_at')->get();
+        return response()->json($categories);
+    }
 }
