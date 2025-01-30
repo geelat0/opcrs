@@ -30,12 +30,12 @@ return new class extends Migration
             $table->string('Masbate_target')->nullable();
             $table->string('Sorsogon_target')->nullable();
 
-            $table->decimal('Albay_budget', 20, 3)->nullable();
-            $table->decimal('Camarines_Sur_budget', 20, 3)->nullable();
-            $table->decimal('Camarines_Norte_budget', 20, 3)->nullable();
-            $table->decimal('Catanduanes_budget', 20, 3)->nullable();
-            $table->decimal('Masbate_budget', 20, 3)->nullable();
-            $table->decimal('Sorsogon_budget', 20, 3)->nullable();
+            $table->decimal('Albay_budget', 20, 3)->default('0.000');
+            $table->decimal('Camarines_Sur_budget', 20, 3)->default('0.000');
+            $table->decimal('Camarines_Norte_budget', 20, 3)->default('0.000');
+            $table->decimal('Catanduanes_budget', 20, 3)->default('0.000');
+            $table->decimal('Masbate_budget', 20, 3)->default('0.000');
+            $table->decimal('Sorsogon_budget', 20, 3)->default('0.000');
 
             $table->longText('measures');
             $table->decimal('alloted_budget', 20, 3);

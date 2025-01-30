@@ -450,7 +450,7 @@ $(document).ready(function() {
 
                 if (divisionName.includes("PO")) {
                     const targetValue = @json($division_targets)[divisionId] || '';
-                    const budgetValue = @json($division_budget)[divisionId] || '';
+                    const budgetValue = @json($division_budget)[divisionId] || 0;
 
                     const displayValue = targetValue === 'Actual' ? 'Actual' : targetValue;
                     const targetDisabled = targetValue === 'Actual' ? 'readonly' : '';

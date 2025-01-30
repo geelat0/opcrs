@@ -175,7 +175,6 @@ class UploadCategoryController extends Controller
 
     }
 
-
     public function list(Request $request){
         $query = CategoryUpload::whereNull('deleted_at') ->orderBy('created_at', 'desc');
 

@@ -222,7 +222,6 @@
 
             columns: [
                 { data: 'id', name: 'id', title: 'ID', visible: false },
-                { data: 'org_id', name: 'org_id', title: 'Organizational Outcome' },
                 { data: 'indicator_id', name: 'indicator_id', title: 'Indicator'},
                 // { data: 'accomplishment', name: 'accomplishment', title: 'Accomplishment'},
                 { data: 'months', name: 'months', title: 'Month', className: 'wrap-text' },

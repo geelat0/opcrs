@@ -151,21 +151,45 @@ class EntriesController extends Controller
         $division_targets = [];
         $division_budget = [];
 
-        foreach ($filteredDivisionIds as $division_id) {
-            $division = Division::find($division_id);
-            $cleanedDivisionName = preg_replace('/\s*PO$/', '', $division->division_name);
+        if( Auth::user()->role->name === 'SuperAdmin'){
+            foreach ($measureDivisionIds as $division_id) {
+                $division = Division::find($division_id);
+                $cleanedDivisionName = preg_replace('/\s*PO$/', '', $division->division_name);
+    
+                $column_name = "{$cleanedDivisionName}_target";
+                $division_targets[$division_id] = $measure->$column_name ?? '';
+    
+                $column_name_budget = "{$cleanedDivisionName}_budget";
+                $division_budget[$division_id] = $measure->$column_name_budget ?? '';
+                $division_name[$division_id] = $division->division_name;
+            }
 
-            $column_name = "{$cleanedDivisionName}_target";
-            $division_targets[$division_id] = $measure->$column_name ?? '';
+        }else{
+            foreach ($filteredDivisionIds as $division_id) {
+                $division = Division::find($division_id);
+                $cleanedDivisionName = preg_replace('/\s*PO$/', '', $division->division_name);
+    
+                $column_name = "{$cleanedDivisionName}_target";
+                $division_targets[$division_id] = $measure->$column_name ?? '';
+    
+                $column_name_budget = "{$cleanedDivisionName}_budget";
+                $division_budget[$division_id] = $measure->$column_name_budget ?? '';
+                $division_name[$division_id] = $division->division_name;
+            }
 
-            $column_name_budget = "{$cleanedDivisionName}_budget";
-            $division_budget[$division_id] = $measure->$column_name_budget ?? '';
-            $division_name[$division_id] = $division->division_name;
         }
+
+        
 
         $divisions = [];
         if (is_array($userDivisionIds)) {
+
+        if (Auth::user()->role->name !== 'SuperAdmin') {
             $divisions = Division::whereIn('id', $filteredDivisionIds)->get(['id', 'division_name']);
+        }else{
+
+            $divisions = Division::get(['id', 'division_name']);
+        }
 
             $divisionData = $divisions->map(function ($division) {
                 return [
@@ -177,7 +201,7 @@ class EntriesController extends Controller
 
         $data = [
             'measure' => $measure,
-            'division_ids' => $filteredDivisionIds, // Return the filtered division IDs
+            'division_ids' => Auth::user()->role->name === 'SuperAdmin' ? $measureDivisionIds : $filteredDivisionIds, // Show all division IDs for super users // Return the filtered division IDs
             'division_targets' => $division_targets,
             'division_budget' => $division_budget,
             'divisions' => $divisionData ?? [],
@@ -310,15 +334,31 @@ class EntriesController extends Controller
         // Keep only the divisions that match the user's divisions
         $filteredDivisionIds = array_intersect($userDivisionIds, $indicatorDivisionIds);
 
-        foreach ($filteredDivisionIds as $division_id) {
-            $division = Division::find($division_id);
-            $cleanedDivisionName = preg_replace('/\s*PO$/', '', $division->division_name);
-            $column_name = "{$cleanedDivisionName}_target";
-            $division_targets[$division_id] = $entries->$column_name ?? '';
+        if(Auth::user()->role->name === 'SuperAdmin'){
+            foreach ($indicatorDivisionIds as $division_id) {
+                $division = Division::find($division_id);
+                $cleanedDivisionName = preg_replace('/\s*PO$/', '', $division->division_name);
+                $column_name = "{$cleanedDivisionName}_target";
+                $division_targets[$division_id] = $entries->$column_name ?? '';
+    
+                $column_name_accomplishment = "{$cleanedDivisionName}_accomplishment";
+                $division_accomplishment[$division_id] = $entries->$column_name_accomplishment ?? '';
+            }
 
-            $column_name_accomplishment = "{$cleanedDivisionName}_accomplishment";
-            $division_accomplishment[$division_id] = $entries->$column_name_accomplishment ?? '';
+        }else{
+            foreach ($filteredDivisionIds as $division_id) {
+                $division = Division::find($division_id);
+                $cleanedDivisionName = preg_replace('/\s*PO$/', '', $division->division_name);
+                $column_name = "{$cleanedDivisionName}_target";
+                $division_targets[$division_id] = $entries->$column_name ?? '';
+    
+                $column_name_accomplishment = "{$cleanedDivisionName}_accomplishment";
+                $division_accomplishment[$division_id] = $entries->$column_name_accomplishment ?? '';
+            }
+
         }
+
+       
 
         $division_ids = $filteredDivisionIds;
 

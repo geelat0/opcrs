@@ -738,6 +738,21 @@
                 console.error('Error fetching roles:', error);
             }
         });
+
+        $('#contactNumber, #edit_contactNumber').on('input', function (e) {
+            const input = e.target;
+            const value = input.value;
+
+            // Remove non-numeric characters
+            input.value = value.replace(/\D/g, '');
+
+            // Limit to 11 characters
+            if (input.value.length > 11) {
+                input.value = input.value.slice(0, 11);
+            }
+        });
+
+   
     });
 </script>
 @endsection

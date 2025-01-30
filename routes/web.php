@@ -127,7 +127,7 @@ Route::middleware(['auth_check'])->group(function () {
         Route::post('/upload/destroy', [UploadController::class, 'destroy'])->name('upload.destroy')->middleware('permission:upload_file');
         Route::get('/upload/getUpload', [UploadController::class, 'getUpload'])->name('upload.getUpload')->middleware('permission:upload_file');
         Route::get('/uploadLogs', [UploadController::class, 'uploadLogs'])->name('upload.uploadLogs')->middleware('permission:uploadLogs');
-        Route::get('/getcategories', [UploadController::class, 'getCategories'])->name('categories.get')->middleware('permission:uploadLogs');
+        Route::get('/getcategories', [UploadController::class, 'getCategories'])->name('categories.get');
 
 
         Route::get('/categories', [UploadCategoryController::class, 'index'])->name('categories.index')->middleware('permission:manage_upload_category');

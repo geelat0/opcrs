@@ -188,8 +188,15 @@ class IndicatorController extends Controller
         }
 
         $divisions = [];
-        if (is_array($userDivisionIds)) {
+            if (is_array($userDivisionIds)) {
+
+            if (Auth::user()->role->name !== 'SuperAdmin') {
+        
             $divisions = Division::whereIn('id', $filteredDivisionIds)->get(['id', 'division_name']);
+            }else{
+                $divisions = Division::get(['id', 'division_name']);
+
+            }
 
             $divisionData = $divisions->map(function ($division) {
                 return [
@@ -803,7 +810,7 @@ class IndicatorController extends Controller
             'org_id' => 'required|exists:org_otc,id',
             // 'target' => 'required',
             'measures' => 'required|string',
-            'alloted_budget' => 'required|numeric',
+            'alloted_budget' => 'required',
             'division_id' => 'required|array',
             'division_id.*' => 'exists:divisions,id',
             'status' => 'nullable|string|in:Active,Inactive',
@@ -824,7 +831,7 @@ class IndicatorController extends Controller
         $indicator->Catanduanes_target = str_replace(['[', ']', '"'], '', json_encode($request->input('Catanduanes_target') ?? ''));
         $indicator->Masbate_target = str_replace(['[', ']', '"'], '', json_encode($request->input('Masbate_target') ?? ''));
         $indicator->Sorsogon_target = str_replace(['[', ']', '"'], '', json_encode($request->input('Sorsogon_target') ?? ''));
-        $indicator->Albay_budget = str_replace(['[', ']', '"'], '', json_encode($request->input('Albay_budget') ?? 0.000));
+        $indicator->Albay_budget = str_replace(['[', ']', '"'], '', json_encode($request->input('Albay_budget') ) ?? 0.000);
         $indicator->Camarines_Sur_budget = str_replace(['[', ']', '"'], '', json_encode($request->input('Camarines_Sur_budget') ?? 0.000));
         $indicator->Camarines_Norte_budget = str_replace(['[', ']', '"'], '', json_encode($request->input('Camarines_Norte_budget') ?? 0.000));
         $indicator->Catanduanes_budget = str_replace(['[', ']', '"'], '', json_encode($request->input('Catanduanes_budget') ?? 0.000));
